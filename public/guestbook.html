@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS only -->
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script>
+    fetch('guestBookData.json')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data){
+            var table = document.getElementById("table");
+            for(var i = 0; i < data.length; i++) {
+                var tr = document.createElement("tr");
+                tr.innerHTML = '<td>' + data[i].id + '</td> <td>' + data[i].username + '</td> <td>' + data[i].country + '</td> <td>' + data[i].message + '</td>';
+                table.appendChild(tr);
+            };
+        });
+</script>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="/">Home</a></li>
+              <li class="active"><a href="/guestbook">Guestbook</a></li>
+              <li><a href="/newmessage">JSON</a></li>
+              <li><a href="/ajaxmessage">AJAX</a></li>
+            </ul>
+          </div>
+      </nav>
+    <div class="container">
+        <div class="row">
+            <h1>Guestbook</h1>
+
+            <table>
+                <thead>
+                <th>#</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Message</th>
+                </thead>
+                <tbody id="table">
+
+                </tbody>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+.banner {
+	width: 100vw;
+	height: 50vh;
+	background-image: url("../images/guestbook.jpg");
+	background-size: cover;
+	background-position: center;
+}

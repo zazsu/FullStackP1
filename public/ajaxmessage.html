@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+<script>
+    window.onload = (event) => {
+        var sendButton = document.getElementById("mySendButton");
+        sendButton.addEventListener("click", function(){
+
+            var name = document.getElementById("name").value;
+            var country = document.getElementById("country").value;
+            var message = document.getElementById("message").value;
+
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4 &&this.status == 200){
+                    document.getElementById("test").innerHTML = this.responseText;
+                };
+            };
+
+            xmlhttp.open("POST", "/ajaxmessage", true);
+
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("name=" + name + "&country=" + country + "&message=" + message );
+
+        });
+    };
+</script>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            <li><a href="/guestbook">Guestbook</a></li>
+            <li><a href="/newmessage">JSON</a></li>
+            <li class="active"><a href="/ajaxmessage">AJAX</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container"> 
+        <div class="row">
+            <h1>AJAX Message</h1>
+            <h6>This form will take your input, collect it and send it to the backend as an AJAX-call. Then it will return your entry as a response to the page without saving it to the json file</h6>
+        </div>
+        <div class="row">
+            <form class="col s12" method="post" action="/newmessage">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="name" name="name" type="text" placeholder="Name" class="validate" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="country" name="country" type="text" placeholder="Country" class="validate" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="message" name="message" class="materialize-textarea" placeholder="Message" class="validate" ></textarea>
+                </div>
+              </div>
+              <button id="mySendButton" class="btn waves-effect waves-light" type="button" name="action">Send
+                <i class="material-icons right"></i>
+              </button>
+            </form>
+          </div>
+          <p id="test" class="teal-text center">
+
+          </p>
+    </div>
+     
+</body>
+</html>
